@@ -1,0 +1,256 @@
+<html><head></head><body><hr/>
+
+<h1>CS 1410: Word Zap!</h1>
+
+<hr/>
+
+<p>Game rules: each player begins the game with seven letters. Players take turns
+eliminating their letters by forming words that use their letters (but only
+their letters), and the first player to eliminate all of their letters wins. If
+a player cannot form a valid word using their letters, they may choose to pass
+their turn and receive an additional letter. Letters are selected randomly by
+the game.</p>
+
+<hr/>
+
+<h2>Assignment</h2>
+
+<p>Your assignment is to create a Python program that uses a class that represents
+a player to play the game described above for two or more players.</p>
+
+<p>Your program will start by asking how many players will play the game, and then
+ask for the name of each of the players. Seven random letters should be assigned
+to each player, and then game play should begin.</p>
+
+<p>For each player, in turn, your program will print the player&#39;s name and their
+letters, and then ask the player for a word. Your program should check to ensure
+that the word entered by the player consists only of the player&#39;s letters (and
+also ensure that the player does not use a letter more times than that letter
+occurs in the player&#39;s letters).</p>
+
+<p>If the word contains a letter that the player does not have, then this word
+should be discarded without any effect to the game, and the player should be
+asked for another word. Otherwise, all letters used by the word should be
+eliminated from the player&#39;s letters.</p>
+
+<p>If the player does not enter a word, then their turn should be considered a
+pass, and an additional random letter should be added to the player&#39;s letters.</p>
+
+<p>After the last player completes their turn, game play should continue with the
+first player and proceed until a player eliminates all of their letters. At this
+point, the name of the winner should be printed and your program should
+terminate. The game should wait until the end of a round to check if a player
+has won. (Previously, the instructions said you could choose when to check this,
+but the tests do not give you that flexibility.)</p>
+
+<hr/>
+
+<h2>Sample</h2>
+
+<p>Program execution:</p>
+
+<pre><code class="language-language-text">Welcome! Time to play! Try to use all of your letters.
+The first player that uses all of their letters wins!
+
+How many players will be playing? 2
+Enter the name for player #1: Luke
+Enter the name for player #2: Leia
+
+Great! Now we can play!
+
+Luke, it is your turn!
+Your letters are: s n s a w n o
+Enter a word to play (or press enter to pass) saw
+Great job!
+
+Leia, it is your turn!
+Your letters are: t a h e e d b
+Enter a word to play (or press enter to pass) heed
+Great job!
+
+Okay! Next round!
+
+Luke, it is your turn!
+Your letters are: n s n o
+Enter a word to play (or press enter to pass) sons
+Check your letters and try again!
+
+Luke, it is your turn!
+Your letters are: n s n o
+Enter a word to play (or press enter to pass)
+You get another letter, &#34;l&#34;!
+
+Leia, it is your turn!
+Your letters are: t a b
+Enter a word to play (or press enter to pass) bat
+Great job!
+
+Leia wins!!
+</code></pre>
+
+<hr/>
+
+<h2>Instructions</h2>
+
+<p>For this assignment you will work in two files: <code>player.py</code> and <code>main.py</code>.</p>
+
+<p>You must follow the specifications exactly, but may choose your own method for
+solving the problem described for each.</p>
+
+<hr/>
+
+<h2>Instructions for <code>player.py</code></h2>
+
+<p>Create a new class <code>Player</code></p>
+
+<h3>Data Members</h3>
+
+<h4><code>name</code></h4>
+
+<p>A string containing the user&#39;s entered name.</p>
+
+<h4><code>letters</code></h4>
+
+<p>A list containing the letters in the player&#39;s hand.</p>
+
+<h3>Methods</h3>
+
+<h4><code>__init__</code></h4>
+
+<p>The constructor takes 1 parameter <code>name</code> a string. It should store the name and
+initialize a data member <code>letters</code> a list to store the users letters.</p>
+
+<pre><code class="language-language-python">p = Player(&#39;Luke&#39;)
+</code></pre>
+
+<h4><code>getName</code></h4>
+
+<p>This method receives no additional parameters and returns the value of the
+<code>name</code> data member.</p>
+
+<pre><code class="language-language-python">p = Player(&#39;Leia&#39;)
+p.getName() -&gt; &#39;Leia&#39;
+</code></pre>
+
+<h4><code>getLetters</code></h4>
+
+<p>This method receives no additional parameters and returns the value of the
+<code>letters</code> data member. This should currently return an empty list until the next
+method is created.</p>
+
+<pre><code class="language-language-python">p = Player(&#39;Luke&#39;)
+p.getLetters() -&gt; []
+</code></pre>
+
+<h4><code>drawLetter</code></h4>
+
+<p>This method adds a randomly chosen letter and adds it to the player&#39;s list of
+letters, it returns the letter the player drew. You might consider using the
+code below to choose your letter from (it is the character frequency of letters
+in a popular anagram game)</p>
+
+<pre><code class="language-language-python">letters = &#39;aaaaaaaaabbccddddeeeeeeeeeeeeffggghhiiiiiiiiijkllllmmnnnnnnooooooooppqrrrrrrssssttttttuuuuvvwwxyyz&#39;
+</code></pre>
+
+<p>example usage:</p>
+
+<pre><code class="language-language-python">p = Player(&#39;Leia&#39;)
+p.getLetters() -&gt; []
+p.drawLetter() -&gt; &#39;a&#39; # random letter
+p.getLetters() -&gt; [&#39;a&#39;]
+p.drawLetter() -&gt; &#39;n&#39; # random letter
+p.getLetters() -&gt; [&#39;a&#39;, &#39;n&#39;]
+</code></pre>
+
+<p>After you finish this method, update your constructor to call it 7 times so a
+player will start out with 7 random letters in their hand. <em>Note: because the
+letters are chosen at random your output will be different than the examples.</em></p>
+
+<pre><code class="language-language-python">p = Player(&#39;Luke&#39;)
+p.getLetters() -&gt; [&#39;n&#39;, &#39;e&#39;, &#39;f&#39;, &#39;g&#39;, &#39;e&#39;, &#39;a&#39;, &#39;z&#39;]
+
+p2 = Player(&#39;Leia&#39;)
+p2.getLetters() -&gt; [&#39;u&#39;, &#39;s&#39;, &#39;b&#39;, &#39;a&#39;, &#39;c&#39;, &#39;e&#39;, &#39;n&#39;]
+</code></pre>
+
+<h4><code>printLetters</code></h4>
+
+<p>This method takes the user&#39;s letters and formats them into a pretty printed
+form. It should return a string of the letters separated by a single space.
+There should be no trailing space.</p>
+
+<pre><code class="language-language-python">p2 = Player(&#39;Leia&#39;)
+p2.getLetters() -&gt; [&#39;u&#39;, &#39;s&#39;, &#39;b&#39;, &#39;a&#39;, &#39;c&#39;, &#39;e&#39;, &#39;n&#39;]
+p2.printLetters() -&gt; &#39;u s b a c e n&#39;
+</code></pre>
+
+<h4><code>checkWord</code></h4>
+
+<p>This method takes 1 additional parameter <code>word</code> a string. If the word contains a
+letter that the player does not have, or the player does not have enough copies
+of the letter it should return <code>False</code>. Otherwise, update the player&#39;s current
+letters removing the letters used to play the word and then return <code>True</code>.</p>
+
+<pre><code class="language-language-python">p = Player(&#39;Luke&#39;)
+# you might consider temporarily forcing the letters while testing
+# make sure to reference your data member storing the letters.
+p.letters = [&#39;n&#39;, &#39;e&#39;, &#39;f&#39;, &#39;g&#39;, &#39;e&#39;, &#39;a&#39;, &#39;z&#39;]
+p.getLetters() -&gt; [&#39;n&#39;, &#39;e&#39;, &#39;f&#39;, &#39;g&#39;, &#39;e&#39;, &#39;a&#39;, &#39;z&#39;]
+p.checkWord(&#39;feed&#39;) -&gt; False
+p.getLetters() -&gt; [&#39;n&#39;, &#39;e&#39;, &#39;f&#39;, &#39;g&#39;, &#39;e&#39;, &#39;a&#39;, &#39;z&#39;]
+p.checkWord(&#39;gag&#39;) -&gt; False
+p.getLetters() -&gt; [&#39;n&#39;, &#39;e&#39;, &#39;f&#39;, &#39;g&#39;, &#39;e&#39;, &#39;a&#39;, &#39;z&#39;]
+p.checkWord(&#39;gene&#39;) -&gt; True
+p.getLetters() -&gt; [&#39;f&#39;, &#39;a&#39;, &#39;z&#39;]
+</code></pre>
+
+<hr/>
+
+<h2>Instructions for <code>main.py</code></h2>
+
+<p>We are not providing detailed instructions for <code>main.py</code>. It is up to you to
+figure out how to finish the game using the player class. Here is a list of
+functions that might be useful to you. You are not required to create any of
+them. <em>As you work on this if you see any other functions that might be useful
+to other students feel free to suggest them.</em></p>
+
+<ul>
+<li><code>getUserInt</code> - Similar to <code>getUserFloat</code> from the previous two assignments but
+instead of casting the user input to a <code>float</code>, cast it to an <code>int</code></li>
+<li><code>getUserString</code> - Similar to <code>getUserString</code> from previous assignments, except
+an empty string should be ok (so a user can skip their turn)</li>
+<li><code>getPlayers</code> - Ask the user how many players will be playing (consider using
+<code>getUserInt</code>). Ask the user for a name and create an instance of <code>Player</code> for
+the number of entered players. Return a list of the <code>Player</code> instances.</li>
+<li><code>convertToLower</code> - Convert a user&#39;s entered <code>word</code> to lowercase. So if they
+type in an <code>A</code> it counts as <code>a</code>.</li>
+</ul>
+
+<p>Your file should consist of a <code>main()</code> function which is called to execute your
+program.</p>
+
+<p>In order to pass the tests, your main function should follow the pattern that
+was outlined in the Sample section above, in addition to other potential corner
+cases. This means that your program should allow the user(s) to:</p>
+
+<ul>
+<li>enter the number of players</li>
+<li>enter the name of each player</li>
+<li>enter a word guess for each player for each turn</li>
+<li>require the player to try again if they enter an invalid word</li>
+<li>win the game when they run out of letters</li>
+<li>end the game as soon as a player runs out of letters (no ties)</li>
+</ul>
+
+<hr/>
+
+<h3>Finishing Up</h3>
+
+<p>Lastly add this snippet at the bottom of your file which will execute your
+<code>main()</code> function when you run <code>main.py</code> but will allow it to be imported
+into the unittest files without executing the main function.</p>
+
+<pre><code class="language-language-python">if __name__ == &#39;__main__&#39;:
+    main()
+</code></pre>
+</body></html>
